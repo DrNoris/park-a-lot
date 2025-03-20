@@ -31,7 +31,7 @@ function Register() {
         <div className="container mx-auto flex items-center justify-center p-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src="src/assets/logo.png" alt="Park a Lot Logo" className="h-15 w-15 object-cover" />
+            <img src="public/logo.png" alt="Park a Lot Logo" className="h-15 w-15 object-cover" />
           </Link>
         </div>
       </header>
