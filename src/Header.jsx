@@ -41,7 +41,7 @@ function Header({isAuthenticated}) {
               </Link>
               <Link to="/register">
                 <button className="bg-transparent hover:bg-galben text-albastru font-semibold hover:text-white py-2 px-4 border border-albastru hover:border-transparent rounded">
-                  SIGN IN
+                  SIGN UP
                 </button>
               </Link>
             </>)}
@@ -89,7 +89,7 @@ function Header({isAuthenticated}) {
             </Link>
             <Link to="/register" onClick={() => setIsOpen(false)}>
               <button className="w-80 bg-transparent hover:bg-galben text-albastru font-semibold hover:text-white py-2 px-4 hover:border-transparent border border-albastru hover:border-transparent rounded">
-                SIGN IN
+                SIGN UP
               </button>
             </Link>
           </>)}
