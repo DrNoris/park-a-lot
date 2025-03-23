@@ -1,26 +1,26 @@
 import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
-function Header({isAuthenticated}) {
+function Header({ isAuthenticated }) {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(isAuthenticated);  // Verifică dacă starea se transmite corect
 
   return (
     <header className="bg-alb text-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between p-4">
+      <div className="container mx-auto flex items-center justify-between p-2 sm:p-4">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img src="logo.png" alt="Park a Lot Logo" className="h-15 w-15 object-cover" />
-          {/* <span className="text-xl text-albastru font-semibold">Park a Lot</span> */}
         </Link>
 
         {/* Meniu Desktop */}
         <nav className="hidden md:flex space-x-6">
-        {isAuthenticated ? (
+          {isAuthenticated ? (
             <>
-              <img className="w-10 h-10" src="https://cdn-icons-png.flaticon.com/512/3119/3119338.png"/>
-              <img className="w-10 h-10" src="https://icons.veryicon.com/png/o/miscellaneous/basic-icon/message-54.png"/>
-              <Link to="/login">
+              <img className="w-10 h-10" src="https://cdn-icons-png.flaticon.com/512/3119/3119338.png" />
+              <img className="w-10 h-10" src="https://icons.veryicon.com/png/o/miscellaneous/basic-icon/message-54.png" />
+              <Link to="/find_spot">
                 <button className="bg-albastru hover:bg-galben text-white font-bold py-2 px-4 border border-albastru rounded hover:border-transparent">
                   HARTĂ
                 </button>
@@ -30,7 +30,7 @@ function Header({isAuthenticated}) {
                   ÎNCHIREAZĂ
                 </button>
               </Link>
-              <img className="w-10 h-10 ml-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"/>
+              <img className="w-10 h-10 ml-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
             </>
           ) : (
             <>
@@ -44,7 +44,8 @@ function Header({isAuthenticated}) {
                   SIGN UP
                 </button>
               </Link>
-            </>)}
+            </>
+          )}
         </nav>
 
         {/* Buton Meniu Burger - Mobil */}
@@ -68,9 +69,9 @@ function Header({isAuthenticated}) {
                 CONT
               </button>
 
-              <hr class="w-70 h-1 rounded-sm dark:bg-albastru"/>
+              <hr className="w-70 h-1 rounded-sm dark:bg-albastru"/>
 
-              <Link to="/" onClick={() => setIsOpen(false)}>
+              <Link to="/find_spot" onClick={() => setIsOpen(false)}>
                 <button className="w-80 bg-albastru hover:bg-galben hover:border-transparent text-white font-bold py-2 px-4 border border-albastru rounded">
                   HARTĂ
                 </button>
@@ -81,18 +82,20 @@ function Header({isAuthenticated}) {
                 </button>
               </Link>
             </>
-          ) : (<>
-            <Link to="/login" onClick={() => setIsOpen(false)}>
-              <button className="w-80 bg-albastru hover:bg-galben text-white font-bold py-2 px-4 hover:border-transparent border border-albastru rounded">
-                LOG IN
-              </button>
-            </Link>
-            <Link to="/register" onClick={() => setIsOpen(false)}>
-              <button className="w-80 bg-transparent hover:bg-galben text-albastru font-semibold hover:text-white py-2 px-4 hover:border-transparent border border-albastru hover:border-transparent rounded">
-                SIGN UP
-              </button>
-            </Link>
-          </>)}
+          ) : (
+            <>
+              <Link to="/login" onClick={() => setIsOpen(false)}>
+                <button className="w-80 bg-albastru hover:bg-galben text-white font-bold py-2 px-4 hover:border-transparent border border-albastru rounded">
+                  LOG IN
+                </button>
+              </Link>
+              <Link to="/register" onClick={() => setIsOpen(false)}>
+                <button className="w-80 bg-transparent hover:bg-galben text-albastru font-semibold hover:text-white py-2 px-4 hover:border-transparent border border-albastru hover:border-transparent rounded">
+                  SIGN UP
+                </button>
+              </Link>
+            </>
+          )}
         </nav>
       )}
     </header>

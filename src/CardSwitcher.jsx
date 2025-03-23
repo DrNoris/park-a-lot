@@ -81,7 +81,7 @@ function CardSwitcher() {
                 {card.avantaje.split("\n").map((line, lineIndex) => (
                   <li key={lineIndex} className="flex line-through decoration-gray-500 items-center">
                     <svg
-                    class="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500"
+                    className="shrink-0 w-4 h-4 text-gray-400 dark:text-gray-500"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
