@@ -115,7 +115,7 @@ function AddListing() {
           <input
             type="text"
             id="details"
-            value={address}
+            value={details}
             onChange={(e) => setDetails(e.target.value)}
             placeholder="Introdu Detalii"
             className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"

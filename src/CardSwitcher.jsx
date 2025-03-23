@@ -46,7 +46,7 @@ function CardSwitcher() {
           return (
             <motion.div
               key={index}
-              className={`w-full p-4 ${card.color} border border-gray-200 rounded-lg shadow-sm sm:p-8 absolute top-0 left-0`}
+              className={`w-full p-4 ${card.color} border border-gray-600 rounded-lg shadow-sm sm:p-8 absolute top-0 left-0`}
               initial={{ opacity: 0, y: 50 }} // initial position and opacity
               animate={{
                 opacity: isActive ? 1 : 0,
