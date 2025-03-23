@@ -36,7 +36,7 @@ function AddListing() {
     });
   
     try {
-      const response = await fetch("http://192.168.34.124:1234/api/add-parking", {
+      const response = await fetch("https://1d2f-5-2-197-133.ngrok-free.app", {
         method: "POST",
         body: formData,
       });
