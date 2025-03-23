@@ -47,7 +47,7 @@ function FAQ() {
         </h1>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="border-b-2 border-gray-300 p-4">
+            <div key={index} data-aos="fade-up" className="border-b-2 border-gray-300 p-4">
               <button
                 onClick={() => handleToggle(index)}
                 className="w-full text-left font-black text-alb

@@ -65,7 +65,6 @@ const parkingLocations = [
 const MapElement = () => {
   const [location, setLocation] = useState(null);
   const [selectedParking, setSelectedParking] = useState(null);
-  const [isMapPressed, setIsMapPressed] = useState(false);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -94,25 +93,22 @@ const MapElement = () => {
 
   const handleParkingClick = (parking) => {
     setSelectedParking(parking);
-    setIsMapPressed(false); // Deschide detaliile parcării
   };
 
-  const handleMapClick = (e) => {
-    // // Verificăm dacă clicul este în jumătatea superioară a ecranului
-    // const screenHeight = window.innerHeight;
-    // if (e.clientY < screenHeight / 2) {
-    //   setIsMapPressed(true); // Închide meniul
-    // }
+  const closeDetails = () => {
+    setSelectedParking(null); 
   };
 
   return (
-    <div className="flex-1 w-full flex flex-col relative z-1" onClick={handleMapClick}>
+    <div className="flex-1 w-full flex flex-col relative z-1">
       <MapContainer
         key={location ? `${location.latitude}-${location.longitude}` : "loading"}
         center={[location.latitude, location.longitude]}
         zoom={13}
         scrollWheelZoom={true}
         className="w-full h-full"
+        attributionControl={false} 
+        zoomControl={false}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -133,7 +129,7 @@ const MapElement = () => {
       </MapContainer>
 
       {/* Afișează detaliile doar dacă meniul nu este închis */}
-      {selectedParking && <ParkingDetails parking={selectedParking} />}
+      {selectedParking && <ParkingDetails parking={selectedParking} closeDetails={closeDetails}/>}
     </div>
   );
 };

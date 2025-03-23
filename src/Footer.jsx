@@ -1,9 +1,11 @@
 import React from "react";
 
-function Footer() {
+function Footer({dark}) {
   return (
-    <footer className="bg-albastru border-t border-gray-600 p-4">
-      <div className="w-full bg-albastru mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+    <footer className={`${dark ? 'bg-albastru' : 'bg-alb'}  border-t ${dark ? 'border-gray-600' : 'border-gray-300'} p-4"`}>
+      <div 
+        className={`w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between ${dark ? 'bg-albastru' : 'bg-alb'}`}
+>
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © 2025{" "}
           <a href="https://flowbite.com/" className="hover:underline">

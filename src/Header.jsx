@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 
 function Header({ isAuthenticated }) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isAuthenticated);  // Verifică dacă starea se transmite corect
 
   return (
     <header className="bg-alb text-white shadow-md">
@@ -25,7 +24,7 @@ function Header({ isAuthenticated }) {
                   HARTĂ
                 </button>
               </Link>
-              <Link to="/register">
+              <Link to="/adauga_anunt">
                 <button className="bg-transparent hover:bg-galben text-albastru font-semibold hover:text-white py-2 px-4 border border-albastru hover:border-transparent rounded">
                   ÎNCHIREAZĂ
                 </button>
@@ -76,7 +75,7 @@ function Header({ isAuthenticated }) {
                   HARTĂ
                 </button>
               </Link>
-              <Link to="/" onClick={() => setIsOpen(false)}>
+              <Link to="/adauga_anunt" onClick={() => setIsOpen(false)}>
                 <button className="w-80 bg-transparent hover:bg-galben hover:border-transparent text-albastru font-semibold hover:text-white py-2 px-4 border border-albastru hover:border-transparent rounded">
                   ÎNCHIREAZĂ
                 </button>

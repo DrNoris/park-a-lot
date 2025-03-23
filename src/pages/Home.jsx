@@ -18,7 +18,7 @@ function Home({isAuthenticated}) {
         <SearchSection />
         <CardSwitcher />
         <FAQ />
-        <Footer />
+        <Footer dark={true} />
     </div>
   )
 }

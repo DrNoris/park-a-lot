@@ -1,27 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-const ParkingDetails = React.memo(({ parking }) => {
-  // Setăm indexul curent al imaginii
+const ParkingDetails = React.memo(({ parking, closeDetails }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedHours, setSelectedHours] = useState([]);
+  const [cost, setCost] = useState(0)
+  const history = useNavigate(); 
 
-  // Funcție pentru navigare la următoarea imagine
   const handleNext = () => {
     setCurrentSlide((prev) => (prev + 1) % parking.photos.length);
   };
 
-  // Funcție pentru navigare la imaginea anterioară
   const handlePrev = () => {
     setCurrentSlide(
       (prev) => (prev - 1 + parking.photos.length) % parking.photos.length
     );
   };
 
-  // Funcție pentru navigarea directă la un slide specificat
   const handleIndicatorClick = (index) => {
     setCurrentSlide(index);
   };
 
-  // Funcție pentru anonimizarea numelui proprietarului
   const getName = (name) => {
     if (!name) return "Anonim";
 
@@ -38,8 +38,64 @@ const ParkingDetails = React.memo(({ parking }) => {
     );
   };
 
+  const generateHourlySlots = (hoursRange) => {
+    const [start, end] = hoursRange.split(" - ").map((time) => time.split(":"));
+    const startHour = parseInt(start[0]);
+    const endHour = parseInt(end[0]);
+
+    const slots = [];
+    for (let i = startHour; i < endHour; i++) {
+      slots.push(`${i}:00 - ${i + 1}:00`);
+    }
+
+    return slots;
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleHourSelect = (hour) => {
+    setSelectedHours((prevSelected) => {
+      const newSelected = prevSelected.includes(hour)
+        ? prevSelected.filter((item) => item !== hour)
+        : [...prevSelected, hour];
+  
+      setCost(newSelected.length * parking.price);
+  
+      return newSelected;
+    });
+  };
+  
+
+  const handleSave = () => {
+    if (selectedHours.length > 0) {
+      const checkoutData = {
+        parkingId: parking.id,
+        owner: parking.owner,
+        price: parking.price,
+        hours: selectedHours,
+        totalCost: cost,
+      };
+
+      localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+
+      history("/checkout");
+    } else {
+      alert("Te rog să selectezi cel puțin o oră.");
+    }
+
+    toggleModal();
+  };
+
   return (
     <div className="z-999 absolute bottom-0 left-0 w-full bg-white p-4 shadow-lg h-1/2 flex">
+      {/* Buton de incidere */}
+      <div className="top-2 left-2" onClick={closeDetails}>
+        <button className="text-2xl text-gray-800 focus:outline-none">
+          ✖️
+        </button>
+      </div>
       {/* Informații utilizator (Stânga) */}
       <div className="w-1/2 flex flex-col justify-between h-full m-3 bg-white rounded-xl shadow-lg p-5 border border-gray-200">
         {/* Titlu + Nume Anonimizat */}
@@ -146,10 +202,51 @@ const ParkingDetails = React.memo(({ parking }) => {
         </div>
 
         {/* Buton Cumpără */}
-        <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+        <button
+          onClick={toggleModal}
+          className="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-alb hover:text-albastru hover:border-green-600 transition border-2 border-transparent"
+        >
           Cumpără
         </button>
       </div>
+
+      {/* Modal pentru selectarea orei */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/80 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] h-[80%] max-w-[90%] md:max-w-[75%] lg:max-w-[60%] max-h-[80%] overflow-y-auto">
+            <h2 className="text-xl text-center font-bold mb-4">Selectează o oră</h2>
+            <div className="space-y-2 overflow-y-auto">
+              {generateHourlySlots(parking.hours).map((hour, index) => (
+                <button
+                  key={index}
+                  className={`w-full text-left px-4 py-2 rounded-lg hover:bg-green-200 transition ${
+                    selectedHours.includes(hour) ? "bg-green-100" : "bg-gray-100"
+                  }`}
+                  onClick={() => handleHourSelect(hour)}
+                >
+                  {hour}
+                </button>
+              ))}
+            </div>
+            <div className="flex mt-2 justify-around px-5 flex-wrap sm:flex-col sm:items-center md:flex-row">
+              <button
+                className="bg-green-600 text-white px-6 py-2 rounded-lg"
+                onClick={handleSave}
+              >
+                Salvează
+              </button>
+              <button
+                className="bg-gray-600 text-white px-6 py-2 rounded-lg"
+                onClick={toggleModal}
+              >
+                Închide
+              </button>
+              <p className="text-center self-center font-bold mt-2 sm:mt-4 md:mt-0">Cost {cost}.00RON</p>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 });

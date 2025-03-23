@@ -5,7 +5,7 @@ import MapElement from '../MapElement';
 function FindSpot({ isAuthenticated }) {
   return (
     <div className="flex flex-col h-screen">
-      <Header isAuthenticated={isAuthenticated} />
+      <Header isAuthenticated={true} />
       <MapElement />
     </div>
   );

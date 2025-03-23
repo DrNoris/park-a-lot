@@ -67,7 +67,7 @@ function Statistics() {
   return (
     <div ref={ref} className="bg-albastru flex flex-col md:flex-row items-center justify-around gap-6 p-15">
       {statistics.map((value, index) => (
-        <div key={index} className="flex flex-col items-center w-40 w-auto">
+        <div data-aos="fade-up" key={index} className="flex flex-col items-center w-40 w-auto">
           {/* SVG-ul cercului */}
           <svg className="w-full h-full" viewBox="0 0 100 100">
             {/* Background Circle */}

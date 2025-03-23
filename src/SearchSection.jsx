@@ -21,7 +21,7 @@ export default function SearchSection() {
 
   return (
     <div className="min-h-80 bg-albastru flex items-center justify-center relative">
-      <div className="w-4/5 p-6 rounded-md">
+      <div data-aos="fade-up" className="w-4/5 p-6 rounded-md">
         <h1 className="text-center text-alb text-2xl font-bold mb-6">Caută un loc de parcare</h1>
 
         <div className="flex flex-col justify-between p-4 md:flex-row md:items-center md:space-x-4">
